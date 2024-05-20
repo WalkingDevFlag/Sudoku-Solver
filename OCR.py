@@ -1,29 +1,49 @@
 import cv2
 import pytesseract
 
-pytesseract.pytesseract.tesseract_cmd = 'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
-# Load the Sudoku grid image
-image = cv2.imread(r"sudoku_grid.jpg")
+pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 
-# Preprocess the image (convert to grayscale and apply thresholding)
-gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-thresh = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)[1]
+def divide(grid_size=532, num_cells=9):
+    cell_size = grid_size // num_cells
+    cells = []
+    
+    for row in range(num_cells):
+        for col in range(num_cells):
+            x1 = col * cell_size
+            y1 = row * cell_size
+            x2 = x1 + cell_size
+            y2 = y1 + cell_size
+            cells.append((x1, y1, x2, y2))
+    
+    return cells
 
-# Perform OCR on the preprocessed image
-custom_config = r'--oem 3 --psm 6 outputbase digits'
-text = pytesseract.image_to_string(thresh, config=custom_config)
+def capture_roi(x1, y1, x2, y2, img):
+    roi = img[y1:y2, x1:x2]
+    return roi
 
-# Convert the OCR result into a 2D array
-sudoku_array = []
-for line in text.split('\n'):
-    row = []
-    for char in line:
-        if char.isdigit():
-            row.append(int(char))
+def extract_number_from_image(roi):
+    config = '--psm 10'
+    number = pytesseract.image_to_string(roi, config=config)
+    if number.isdigit():
+        return int(number)
+    else:
+        return 0
+
+def process(cells, img):
+    sudoku_array = [[0 for _ in range(9)] for _ in range(9)]
+    for idx, cell in enumerate(cells):
+        x1, y1, x2, y2 = cell
+        roi = capture_roi(x1, y1, x2, y2, img)
+        
+        number = extract_number_from_image(roi)
+        
+        if number:
+            row = idx // 9
+            col = idx % 9
+            sudoku_array[row][col] = number
         else:
-            row.append(0)
-    sudoku_array.append(row)
-
-# Print the 2D array representation of the Sudoku grid
-for row in sudoku_array:
-    print(row)
+            row = idx // 9
+            col = idx % 9
+            sudoku_array[row][col] = 0
+    
+    return sudoku_array
