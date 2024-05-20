@@ -44,5 +44,3 @@ def find_empty_cell(board):
                 return (i, j)
     return None
 
-if solve_sudoku(board):
-    print("Hurray!, We solved the puzzle  ez shit")
