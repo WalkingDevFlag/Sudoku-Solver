@@ -4,8 +4,8 @@ import numpy as np
 from PIL import ImageGrab
 
 def main():
-    x1, y1 = 290, 290
-    x2, y2 = 1220, 840
+    x1, y1 = 293, 299
+    x2, y2 = 826, 831
     gray = img_grab.screen_grab(x1, y1, x2, y2)
     
     # Display the grayscale image
