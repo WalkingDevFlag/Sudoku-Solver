@@ -3,6 +3,8 @@ import cv2
 import numpy as np
 from PIL import ImageGrab
 import ocr
+import backtracking
+from backtracking import solve, valid, print_board, find_empty
 
 def main():
     x1, y1 = 293, 299
@@ -19,7 +21,10 @@ def main():
     
     print("Sudoku Grid:")
     for row in sudoku_array:
-        print(row)  
+        print(row)
+
+    backtracking.solve(sudoku_array)
+    backtracking.print_board(sudoku_array)
 
 if __name__ == "__main__":
     main()
