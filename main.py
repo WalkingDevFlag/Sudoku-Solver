@@ -4,20 +4,16 @@ import numpy as np
 from PIL import ImageGrab
 import ocr
 import backtracking
-from backtracking import solve, valid, print_board, find_empty
 
 def main():
     x1, y1 = 293, 299
     x2, y2 = 825, 831
     img = img_grab.screen_grab(x1, y1, x2, y2)
-    
-    # Display the captured image
-    cv2.imshow('Captured Image', img)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
 
-    cells = ocr.divide()
-    sudoku_array = ocr.process(cells, img)
+    # Load the custom OCR model
+    ocr_model = ocr.load_ocr_model('ocr.h5')
+
+    sudoku_array = ocr.process(img, ocr_model)
     
     print("Sudoku Grid:")
     for row in sudoku_array:
