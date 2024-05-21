@@ -23,15 +23,11 @@ def capture_roi(x1, y1, x2, y2, img):
 
 def extract_number_from_image(roi):
     config = '--psm 10 --oem 3 -c tessedit_char_whitelist=0123456789'
-    try:
-        number = pytesseract.image_to_string(roi, config=config)
-        number = ''.join(filter(str.isdigit, number))  # Extract only digits
-        if number:
-            return int(number)
-        else:
-            return 0
-    except Exception as e:
-        print(f"Error during OCR: {e}")
+    number = pytesseract.image_to_string(roi, config=config)
+    number = ''.join(filter(str.isdigit, number))
+    if number:
+        return int(number)
+    else:
         return 0
 
 def process(cells, img):
@@ -54,7 +50,7 @@ def process(cells, img):
             print(f"Cell {row+1}-{col+1}: No number identified - 0")
         
         # Display the ROI for visual verification
-        cv2.imshow('ROI', roi)
-        cv2.waitKey(0)
+        #cv2.imshow('ROI', roi)
+        #cv2.waitKey(0)
     
     return sudoku_array
