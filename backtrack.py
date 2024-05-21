@@ -1,3 +1,4 @@
+'''
 def is_valid(board, row, col, num):
     # TO  Check if the number is already present in the row
     for i in range(9):
@@ -43,4 +44,4 @@ def find_empty_cell(board):
             if board[i][j] == 0:
                 return (i, j)
     return None
-
+    '''
