@@ -19,10 +19,7 @@ def main():
     
     print("Sudoku Grid:")
     for row in sudoku_array:
-        print(row)
-
-    print("\nCell Coordinates:")
-    print(cells)
+        print(row)  
 
 if __name__ == "__main__":
     main()
