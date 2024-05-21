@@ -49,7 +49,7 @@ def process(cells, img):
             sudoku_array[row][col] = 0
             print(f"Cell {row+1}-{col+1}: No number identified - 0")
         
-        # Display the ROI for visual verification
+        #Display the ROI for visual verification
         #cv2.imshow('ROI', roi)
         #cv2.waitKey(0)
     
