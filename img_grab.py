@@ -15,4 +15,4 @@ def screen_grab(x1, y1, x2, y2):
     #Thresholding
     thresh = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY_INV, 11, 2)
     
-    return gray
+    return thresh
