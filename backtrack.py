@@ -5,7 +5,7 @@ def solve(bo):
     else:
         row, col = find
 
-    for i in range(1,10):
+    for i in range(1, 10):
         if valid(bo, i, (row, col)):
             bo[row][col] = i
 
@@ -16,19 +16,15 @@ def solve(bo):
 
     return False
 
-
 def valid(bo, num, pos):
-    # Check row
     for i in range(len(bo[0])):
         if bo[pos[0]][i] == num and pos[1] != i:
             return False
 
-    # Check column
     for i in range(len(bo)):
         if bo[i][pos[1]] == num and pos[0] != i:
             return False
 
-    # Check box
     box_x = pos[1] // 3
     box_y = pos[0] // 3
 
@@ -38,7 +34,6 @@ def valid(bo, num, pos):
                 return False
 
     return True
-
 
 def print_board(bo):
     for i in range(len(bo)):
@@ -54,17 +49,8 @@ def print_board(bo):
             else:
                 print(str(bo[i][j]) + " ", end="")
 
-
 def find_empty(bo):
     for i in range(len(bo)):
         for j in range(len(bo[0])):
             if bo[i][j] == 0:
                 return (i, j)  # row, col
-
-    return None
-
-print_board(board)
-solve(board)
-print("___________________")
-print_board(board)
-\
