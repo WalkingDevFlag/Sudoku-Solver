@@ -1,4 +1,4 @@
-# Sudoku Solver with OCR (Issue Highlighted)
+# Sudoku Solver with OCR 
 
 This Python script is designed to solve Sudoku puzzles using image processing and OCR (Optical Character Recognition). However, there is an issue highlighted where the OCR is able to recognize all the digits except that it is identifying one blank space as a digit.
 
